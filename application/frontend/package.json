@@ -1,0 +1,33 @@
+{
+  "name": "dobib",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "gitlab",
+    "url": "https://github.com/openkfw/hackathon"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "react": "^16.13.1",
+    "react-datasheet": "^1.4.8",
+    "react-dom": "^16.13.1",
+    "react-jss": "^10.3.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:4000",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

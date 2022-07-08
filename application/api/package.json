@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API for do bib",
+  "main": "server.js",
+  "repository": {
+    "type": "gitlab",
+    "url": "https://github.com/openkfw/hackathon"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "joi": "^13.4.0",
+    "mongoose": "^5.9.27"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "author": "",
+  "license": "MIT"
+}

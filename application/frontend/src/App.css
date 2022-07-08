@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+  background-image: url("/kfw_background_small.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.App-title {
+  font-size: 1.5em;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}

@@ -1,0 +1,15 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.field {
+  min-width: 80%;
+}
