@@ -18,7 +18,9 @@ use the password from azure
 
 ### Pull
 
+```
 sudo docker pull littlebobbytables.azurecr.io/doc22/application_api
+```
 
 
 # Terraform
