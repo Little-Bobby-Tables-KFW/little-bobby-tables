@@ -32,6 +32,7 @@ jobs:
       with:
         path: '${{ matrix.project }}/package-lock.json'
         key: node-modules-${{ hashFiles('app/package.json') }}
+        run: npm ci
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
