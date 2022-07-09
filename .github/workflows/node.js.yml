@@ -31,7 +31,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: '${{ matrix.project }}/package-lock.json'
-        key: node-modules-${{ hashFiles('app/package.json') }}
+        key: node-modules-${{ hashFiles('application/${{ matrix.project }}/package.json') }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
