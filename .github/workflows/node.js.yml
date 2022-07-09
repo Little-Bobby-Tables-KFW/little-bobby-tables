@@ -27,13 +27,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Caching node modules
+      uses: actions/cache@v2
+      with:
+        path: '${{ matrix.project }}/package-lock.json'
+        key: node-modules-${{ hashFiles('app/package.json') }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        cache: npm
-        cache-dependency-path: |
-          '${{ matrix.project }}/package-lock.json'
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
