@@ -39,5 +39,11 @@ jobs:
         cache-dependency-path: |
           'application/${{ matrix.project }}/package-lock.json'
     - run: npm ci --cache '${{ matrix.project }}'
-    #- run: npm run build --if-present
-    #- run: npm test
+      working-directory: |
+           'application/${{ matrix.project }}/package-lock.json'
+    - run: npm run build --if-present
+      working-directory: |
+        'application/${{ matrix.project }}/package-lock.json'
+    - run: npm test
+      working-directory: |
+        'application/${{ matrix.project }}/package-lock.json'
