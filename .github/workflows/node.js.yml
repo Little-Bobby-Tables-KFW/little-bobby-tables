@@ -53,7 +53,7 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker compose build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22:${{ github.sha }}
+            docker compose build
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22:${{ github.sha }}
 
         - name: 'Deploy to Azure Container Instances'
