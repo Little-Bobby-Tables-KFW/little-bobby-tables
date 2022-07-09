@@ -15,3 +15,11 @@ before you can use ACR you need to run docker login
     docker login littlebobbytables.azurecr.io # you will be promted to enter username and password
 use credentials from azure, username is: littlebobbytables
 use the password from azure
+
+# Terraform
+```
+terraform init
+az login
+terraform plan
+terraform apply
+```
