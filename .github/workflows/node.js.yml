@@ -31,14 +31,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: |
-          './application/${{ matrix.project }}/package-lock.json'
+        cache-dependency-path: './application/${{ matrix.project }}/package-lock.json'
     - run: npm ci
-      working-directory: |
-           './application/${{ matrix.project }}'
+      working-directory: './application/${{ matrix.project }}'
     - run: npm run build --if-present
-      working-directory: |
-        './application/${{ matrix.project }}'
+      working-directory: './application/${{ matrix.project }}'
     - run: npm test
-      working-directory: |
-        './application/${{ matrix.project }}'
+      working-directory: './application/${{ matrix.project }}'
