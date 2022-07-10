@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "displayName": "lbt-policy",
+    "policyType": "Custom",
+    "mode": "All",
+    "metadata": {
+      "category": "region",
+      "createdBy": "1d60ad3e-6ab5-48c3-9d78-dcdbc1dc429e",
+      "createdOn": "2022-07-10T09:32:46.4342961Z",
+      "updatedBy": "1d60ad3e-6ab5-48c3-9d78-dcdbc1dc429e",
+      "updatedOn": "2022-07-10T09:49:11.0992628Z"
+    },
+    "parameters": {
+      "allowedLocations": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed locations",
+          "description": "The list of allowed locations for resources.",
+          "strongType": "location"
+        },
+        "allowedValues": [
+          "westeurope",
+          "northeurope",
+          "germanywestcentral"
+        ],
+        "defaultValue": [
+          "westeurope",
+          "northeurope",
+          "germanywestcentral"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "location",
+          "in": "[parameters('allowedLocations')]"
+        }
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  },
+  "id": "/subscriptions/999cb64e-215a-41e6-896f-3891ac50d4a1/providers/Microsoft.Authorization/policyDefinitions/50ce2c97-39b3-4314-9e74-114c69adb199",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "name": "50ce2c97-39b3-4314-9e74-114c69adb199",
+  "systemData": {
+    "createdBy": "sdietz101@gmx.de",
+    "createdByType": "User",
+    "createdAt": "2022-07-10T09:32:46.411863Z",
+    "lastModifiedBy": "sdietz101@gmx.de",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2022-07-10T09:49:11.0843019Z"
+  }
+}
