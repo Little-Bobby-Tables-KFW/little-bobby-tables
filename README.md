@@ -30,3 +30,6 @@ az login
 terraform plan
 terraform apply
 ```
+
+# CI pipeline
+just push to verify
