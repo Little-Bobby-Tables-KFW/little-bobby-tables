@@ -1,0 +1,74 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+defaults:
+  run:
+    shell: bash
+    working-directory: application
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        project: [frontend, api]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: './application/${{ matrix.project }}/package-lock.json'
+    - run: npm ci
+      working-directory: './application/${{ matrix.project }}'
+    - run: npm run build --if-present
+      working-directory: './application/${{ matrix.project }}'
+    - run: npm test
+      working-directory: './application/${{ matrix.project }}'
+      
+  build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+        # checkout the repo
+        - name: 'Checkout GitHub Action'
+          uses: actions/checkout@main
+        
+        - name: 'Build and push image'
+          uses: azure/docker-login@v1
+          with:
+            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            username: ${{ secrets.REGISTRY_USERNAME }}
+            password: ${{ secrets.REGISTRY_PASSWORD }}
+        - run: |
+            docker compose build
+            docker image tag application_frontend:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:latest
+            docker image tag application_api:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:latest
+            docker image tag application_mongo-seed:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_mongo-seed:latest
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:latest
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:latest
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_mongo-seed:latest
+
+        - name: 'Deploy to Azure Container Instances'
+          uses: 'azure/aci-deploy@v1'
+          with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22:${{ github.sha }}
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: frontend
+            location: 'germanywestcentral'
