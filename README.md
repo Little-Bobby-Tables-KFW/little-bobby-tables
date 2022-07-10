@@ -33,3 +33,13 @@ terraform apply
 
 # CI pipeline
 just push to verify
+
+# Azure Policy
+copy the content of policy.json to the Azure portal by creating a new policy. Ensure west- and northeurope are in the allowedValues array.
+```
+"allowedValues": [
+          "westeurope",
+          "northeurope",
+        ],
+```
+If there are ressources in other than this regions the compliance view in the Azure portal will report compliance violations.
