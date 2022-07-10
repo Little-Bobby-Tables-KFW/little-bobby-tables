@@ -43,7 +43,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
           matrix:
-            project: [application_frontend, application_api, db-seed]
+            project: [application_frontend, application_api]
         steps:
         # checkout the repo
         - name: 'Checkout GitHub Action'
