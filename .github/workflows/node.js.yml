@@ -54,12 +54,12 @@ jobs:
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
             docker compose build
-            docker image tag application_frontend:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:${{ github.sha }}
-            docker image tag application_api:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:${{ github.sha }}
-            docker image tag mongo-seed:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/mongo-seed:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/mongo-seed:${{ github.sha }}
+            docker image tag application_frontend:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:latest
+            docker image tag application_api:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:latest
+            docker image tag mongo-seed:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/mongo-seed:latest
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:latest
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:latest
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/mongo-seed:latest
 
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
