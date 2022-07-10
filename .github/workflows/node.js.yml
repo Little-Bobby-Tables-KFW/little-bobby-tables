@@ -41,9 +41,6 @@ jobs:
       
   build-and-deploy:
         runs-on: ubuntu-latest
-        strategy:
-          matrix:
-            project: [frontend, api]
         steps:
         # checkout the repo
         - name: 'Checkout GitHub Action'
@@ -57,8 +54,12 @@ jobs:
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
             docker compose build
-            docker image tag ${{ matrix.project }}:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/${{ matrix.project }}:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/${{ matrix.project }}:${{ github.sha }}
+            docker image tag application_frontend:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:${{ github.sha }}
+            docker image tag application_api:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:${{ github.sha }}
+            docker image tag mongo-seed:${{ github.sha }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/mongo-seed:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_frontend:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/application_api:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/doc22/mongo-seed:${{ github.sha }}
 
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
